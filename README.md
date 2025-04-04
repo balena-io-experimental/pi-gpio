@@ -5,11 +5,11 @@ For more information about GPIO on Raspberry Pi see:
 
 - [balenaOS GPIO documentation](https://docs.balena.io/learn/develop/hardware/gpio/#raspberry-pi)
 - [Raspberry Pi informative pdf on the history of Pi GPIO](https://pip.raspberrypi.com/categories/685-whitepapers-app-notes/documents/RP-006553-WP/A-history-of-GPIO-usage-on-Raspberry-Pi-devices-and-current-best-practices.pdf)
-- [Example projects](https://projects.raspberrypi.org/en/projects/physical-computing/0) from Raspberry Pi using GPIO. (NOT balena-specific)
+- [Example projects](https://projects.raspberrypi.org/en/projects/physical-computing/0) from Raspberry Pi using GPIO. (NOT balena or container-specific)
 
 ## GPIO Libraries
 
-Each example library is in a separate folder and will run in a separate container if pushed to a balena device or another container runtime. The libraries do not auto start, since if they did, they would interfere with each other. In other words, only use one of these libraries at a time! See the headings below for details on how to run each example library. These examples assume you have connected an LED to GPIO (not pin number) 26. You should probably use a 100 - 330 ohm resister in line with your LED. See the project link above for more details about connecting an LED. The examples will still run without a connected LED, but you won't have any visual feedback that the GPIO is working.
+Each example library is in a separate folder and will run in a separate container if pushed to a balena device or another container runtime. The libraries do not auto start, since if they did, they would interfere with each other. In other words, only use one of these libraries at a time! (If you get a 'GPIO busy' error, you may need to reboot your Pi.) See the headings below for details on how to run each example library. These examples assume you have connected an LED to GPIO (not pin number) 26. You should probably use a 100 - 330 ohm resister in line with your LED. See the project link above for more details about connecting an LED. The examples will still run without a connected LED, but you won't have any visual feedback that the GPIO is working.
 
 ### libgpiod
 [libgpiod](https://libgpiod.readthedocs.io/en/latest/) is a C library and set of tools for interacting with the Linux GPIO character devices (/dev/gpiochipX). To run this example, ssh into the `libgpiod` service and run `./example.sh`
@@ -26,17 +26,23 @@ Each example library is in a separate folder and will run in a separate containe
 ## Compatibility
 
 Versions of these libraries used for testing:
+
 lgpio Version: 0.2.2.0
+
 gpiozero Version: 2.0.1
+
 gpiod Version: 1.6.3-1+b3
+
 rpi-lgpio Version: 0.6
 
-All libraries tested as follows:
+All libraries tested to work with the results as follows:
 
-| device type | balenaOS version    | kernel version |
-| ----------- |-------------------- | -------------- |
-| Pi 4        | balenaOS 6.5.1+rev4 | ?
-| Pi 5        | balenaOS 6.5.1+rev5 | ?
+| device type | balenaOS version    | kernel version | pinctrl | gpiozero | gpiod | rpi-lgpio |
+| ----------- |-------------------- | -------------- |---------|----------|-------|-----------|
+| Pi 4        | 6.5.1+rev4          | ?              |
+| Pi 5        | 6.5.1+rev5          | 6.12.20        | yes     | yes      | yes   | yes       |
+| Pi 5        | 6.5.9               | 6.12.20        | yes     | yes      | yes   | yes       |
+| Pi 5        | 5.3.22              | 6.6.22         | yes     | no       | no    | yes       |
 
 
 
