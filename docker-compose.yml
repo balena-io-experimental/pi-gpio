@@ -1,0 +1,23 @@
+version: '2'
+  
+services:
+
+  rpi-lgpio:
+    build: ./rpi-lgpio
+    restart: always
+    privileged: true
+    
+  libgpiod:
+    build: ./libgpiod
+    restart: always
+    privileged: true
+    
+  gpiozero:
+    build: ./gpiozero
+    restart: always
+    privileged: true
+    
+  pinctl:
+    build: ./pinctl
+    restart: always
+    privileged: true
