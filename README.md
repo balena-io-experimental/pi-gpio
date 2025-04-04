@@ -9,7 +9,9 @@ For more information about GPIO on Raspberry Pi see:
 
 ## GPIO Libraries
 
-Each example library is in a separate folder and will run in a separate container if pushed to a balena device or another container runtime. The libraries do not auto start, since if they did, they would interfere with each other. In other words, only use one of these libraries at a time! (If you get a 'GPIO busy' error, you may need to reboot your Pi.) See the headings below for details on how to run each example library. These examples assume you have connected an LED to GPIO (not pin number) 26. You should probably use a 100 - 330 ohm resister in line with your LED. See the project link above for more details about connecting an LED. The examples will still run without a connected LED, but you won't have any visual feedback that the GPIO is working.
+Each example library is in a separate folder and will run in a separate container if pushed to a balena device or another container runtime. The libraries do not auto start, since if they did, they would interfere with each other. In other words, only use one of these libraries at a time! (If you get a 'GPIO busy' error, you may need to reboot your Pi.) 
+
+See the headings below for details on how to run each example library. These examples assume you have connected an LED to GPIO (not pin number) 26. You should probably use a 100 - 330 ohm resister in line with your LED. See the project link above for more details about connecting an LED. The examples will still run without a connected LED, but you won't have any visual feedback that the GPIO is working.
 
 ### libgpiod
 [libgpiod](https://libgpiod.readthedocs.io/en/latest/) is a C library and set of tools for interacting with the Linux GPIO character devices (/dev/gpiochipX). To run this example, ssh into the `libgpiod` service and run `./example.sh`
@@ -33,16 +35,29 @@ gpiozero Version: 2.0.1
 
 gpiod Version: 1.6.3-1+b3
 
+pinctrl (no version found; built from source on April 2, 2025)
+
 rpi-lgpio Version: 0.6
+
 
 All libraries tested to work with the results as follows:
 
 | device type | balenaOS version    | kernel version | pinctrl | gpiozero | gpiod | rpi-lgpio |
 | ----------- |-------------------- | -------------- |---------|----------|-------|-----------|
-| Pi 4        | 6.5.1+rev4          | ?              |
-| Pi 5        | 6.5.1+rev5          | 6.12.20        | yes     | yes      | yes   | yes       |
+| Pi 3 (armv7)  | 6.5.9             | 6.12.20        | yes     | yes      | yes   | yes       |
+| Pi 4        | 6.5.1+rev4          | 6.12.1         | yes     | yes      | yes   | yes       |
+| Pi 4        | 6.5.9               | 6.12.20        | yes     | yes      | yes   | yes       |
 | Pi 5        | 6.5.9               | 6.12.20        | yes     | yes      | yes   | yes       |
-| Pi 5        | 5.3.22              | 6.6.22         | yes     | no       | no    | yes       |
+| Pi 5        | 6.5.1+rev5          | 6.12.20        | yes     | yes      | yes   | yes       |
+| Pi 5        | 5.3.22              | 6.6.22         | yes     | no*       | no*    | yes       |
+
+\* = no error occurred, but connected LED did not blink.
+
+Testing devices details:
+- Raspberry Pi 3 Model B Plus Rev 1.3
+- Raspberry Pi 4 Model B Rev 1.5 (8GB RAM)
+- Raspberry Pi 5 Model B Rev 1.0 (2GB RAM)
+
 
 
 
